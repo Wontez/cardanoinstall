@@ -3,10 +3,10 @@
 sudo apt-get update -y
 sudo apt-get install automake build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ tmux git jq wget libncursesw5 libtool autoconf -y &&
 
-wget https://downloads.haskell.org/~cabal/cabal-install-3.2.0.0/cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz
-tar -xf cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz
-rm cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz cabal.sig
-mkdir -p ~/.local/bin && mv cabal ~/.local/bin/
+wget https://downloads.haskell.org/~cabal/cabal-install-3.2.0.0/cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz &&
+tar -xf cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz &&
+rm cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz cabal.sig &&
+mkdir -p ~/.local/bin && mv cabal ~/.local/bin/ &&
 
 cat <<EOT >> $HOME/.bashrc
 export PATH="~/.local/bin:$PATH"
