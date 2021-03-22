@@ -9,13 +9,6 @@ rm cabal-install-3.2.0.0-x86_64-unknown-linux.tar.xz cabal.sig
 mkdir -p ~/.local/bin && mv cabal ~/.local/bin/
 
 cat <<EOT >> $HOME/.bashrc
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 export PATH="~/.local/bin:$PATH"
 EOT
 
@@ -31,8 +24,7 @@ rm ghc-8.6.5-x86_64-deb9-linux.tar.xz
 sudo make install && ghc --version
 
 cd ~
-git clone https://github.com/input-output-hk/libsodium
-cd libsodium
+git clone https://github.com/input-output-hk/libsodium && cd libsodium
 git checkout 66f017f1
 ./autogen.sh
 ./configure
@@ -43,14 +35,18 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 EOT
 
-source .bashrc
+source .bashrc && cd ~
 
-git clone https://github.com/input-output-hk/cardano-node.git
-cd cardano-node
-git fetch --all --tags
-git tag && git checkout tags/1.19.1 && cabal build all
+git clone https://github.com/input-output-hk/cardano-node.git && 
+cd cardano-node &&
+git fetch --all --tags && 
+git checkout tags/1.26.0 && 
+cabal build all &&
 
-cp -p dist-newstyle/build/x86_64-linux/ghc-8.6.5/cardano-node-1.19.1/x/cardano-node/build/cardano-node/cardano-node ~/.local/bin/
-cp -p dist-newstyle/build/x86_64-linux/ghc-8.6.5/cardano-cli-1.19.1/x/cardano-cli/build/cardano-cli/cardano-cli ~/.local/bin/
+cp -p dist-newstyle/build/x86_64-linux/ghc-8.6.5/cardano-node-1.26.0/x/cardano-node/build/cardano-node/cardano-node ~/.local/bin/
+cp -p dist-newstyle/build/x86_64-linux/ghc-8.6.5/cardano-cli-1.26.0/x/cardano-cli/build/cardano-cli/cardano-cli ~/.local/bin/
 
-cardano-cli --version
+ghc --version &&
+cardano-cli --version &&
+cardano-node --version &%
+echo "Cardano Node is Ready!"
