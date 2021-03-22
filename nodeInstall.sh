@@ -21,9 +21,8 @@ tar -xf ghc-8.6.5-x86_64-deb9-linux.tar.xz
 rm ghc-8.6.5-x86_64-deb9-linux.tar.xz
 
 ./configure
-sudo make install && ghc --version
+sudo make install && cd 
 
-cd ~
 git clone https://github.com/input-output-hk/libsodium && cd libsodium
 git checkout 66f017f1
 ./autogen.sh
@@ -35,7 +34,7 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 EOT
 
-source .bashrc && cd ~
+source $HOME/.bashrc && cd
 
 git clone https://github.com/input-output-hk/cardano-node.git && 
 cd cardano-node &&
